@@ -64,9 +64,7 @@ public class Pelicula
     	this.titulo = unTitulo;
     	this.disponibles = new ArrayList<>();
     	this.prestadas = new ArrayList<>();
-    	this.codigoSiguienteCopia = 1; la primera copia cdg 1
-    	
-    	
+    	this.codigoSiguienteCopia = 1; //la primera copia cdg 1
     	
     }
 
@@ -81,7 +79,12 @@ public class Pelicula
      */
     public int agregarCopia( )
     {
-    	//TODO implementar. Recuerde retornar lo indicado en la documentaci�n. 
+    	Copia nuevaCopia = new copia(this.titulo,this.codigoSiguienteCopia);
+    	disponibles.add(nuevaCopia);
+    	int codigoAsignado = codigoSiguienteCopia;
+    	codigoSiguienteCopia++;
+    	return codigoAsignado;
+    	
     }
 
     /**
@@ -91,7 +94,14 @@ public class Pelicula
      */
     public Copia alquilarCopia( )
     {
-    	//TODO implementar. Recuerde retornar lo indicado en la documentaci�n.
+    	if(disponibles.isEmpty()) {
+    		return null; //verifica si hay copias
+    	}
+    	//se optiene la copia
+    	Copia copiaAlquilada = disponibles.remove(0);
+    	prestadas.add(copiaAlquilada);
+    	return copiaAlquilada;
+    	
     }
 
     /**
@@ -102,7 +112,13 @@ public class Pelicula
      */
 
      //TODO Definir la signatura del m�todo de acuerdo a la documentaci�n e implementarlo.
-
+    
+    public Copia darCopiaDisponibleParaAlquiler() {
+        if (disponibles.isEmpty()) {
+            return null;
+        }
+        return disponibles.get(0); // No la remueve
+    }
     /**
      * Retorna el t�tulo de la pel�cula.
      * @return t�tulo de la pel�cula.
@@ -116,11 +132,35 @@ public class Pelicula
      * Retorna la cantidad total de copias que existen de la pel�cula en la videotienda
      * @return entero con la cantidad de copias que existen en la tienda
      */
+    
     //TODO Definir la signatura del m�todo de acuerdo a la documentaci�n e implementarlo.
+    
+    public void devolverCopia( Copia copiaADevolver ) throws Exception
+    {
+        // Se busca la copia en la lista de prestadas
+        boolean encontrada = prestadas.remove(copiaADevolver); // elimina el objeto si lo encuentra
 
+        if (!encontrada) {
+            throw new Exception("La copia a devolver no estaba registrada como prestada en esta película.");
+        }
+        disponibles.add(copiaADevolver);
+    }
+    
     /**
      * Retorna el n�mero de copias disponibles
      * @return n�mero de copias disponibles
      */
-    //TODO Definir la signatura del m�todo de acuerdo a la documentaci�n e implementarlo.
+    public int darTotalCopias( )
+       {
+          return disponibles.size() + prestadas.size();
+       }      
+        
+        /**
+         * Retorna el número de copias disponibles.
+         * @return número de copias disponibles.
+         */
+        public int darNumeroCopiasDisponibles( )
+        {
+            return disponibles.size();
+        }
 }
