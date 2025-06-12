@@ -36,13 +36,17 @@ public class VideoTienda
      * Clientes
      */
     //TODO declare el atributo
+<<<<<<< HEAD
     private double tarifa;
 
+=======
+    private ArrayList<Cliente> clientes;
+>>>>>>> 5ec525a1ab8ad652f4a33f7af587c204aa2c90e0
     /**
      * Cat�logo de pel�culas
      */
     //TODO declare el atributo
-    
+    private ArrayList<Pelicula> catalogo;
     //-----------------------------------------------------------------
     // Constructores
     //-----------------------------------------------------------------
@@ -53,7 +57,15 @@ public class VideoTienda
      */
     public VideoTienda( int unaTarifa )
     {
+<<<<<<< HEAD
     	tarifa = 2.5; //TODO implementar inicializando los atributos
+=======
+    	//TODO implementar inicializando los atributos
+    	// Inicializa el ArrayList de clientes y catalogo
+    	this.tarifaDiaria = unaTarifa;
+        this.clientes = new ArrayList<>(); 
+        this.catalogo = new ArrayList<>();
+>>>>>>> 5ec525a1ab8ad652f4a33f7af587c204aa2c90e0
     }
 
     //-----------------------------------------------------------------
@@ -121,7 +133,14 @@ public class VideoTienda
      */
     public void afiliarCliente( String cedula, String nombre, String direccion ) throws Exception
     {
-    	//TODO implementar
+    	//verifica 
+    	  if (buscarCliente(cedula) != null) {
+              throw new Exception("La cédula del cliente ya está registrada en la videotienda.");
+          }
+
+          // Se crea un nuevo cliente 
+          Cliente nuevoCliente = new Cliente(cedula, nombre, direccion);
+          clientes.add(nuevoCliente);
     }
     
     /**
@@ -131,7 +150,13 @@ public class VideoTienda
      */
     public Cliente buscarCliente( String cedula )
     {
-    	//TODO implementar
+    	//itera sobre la lista de clientes para encontrar la cédula
+        for (Cliente cliente : clientes) {
+            if (cliente.darCedula().equals(cedula)) { 
+                return cliente;
+            }
+        }
+        return null; 
     }
 
 
@@ -146,7 +171,18 @@ public class VideoTienda
      */
     public void cargarSaldoCliente( String cedula, int monto ) throws Exception
     {
-    	//TODO implementar
+    		// control
+    	  if (monto <= 0) {
+              throw new Exception("La recarga de saldo debe ser mayor que 0.");
+          }
+
+          Cliente cliente = buscarCliente(cedula);
+          if (cliente == null) {
+              throw new Exception("El cliente con cédula " + cedula + " no existe.");
+          }
+
+          cliente.incrementarSaldo(monto);
+      
     }
 
     /**
@@ -162,8 +198,39 @@ public class VideoTienda
      */
     public int alquilarPelicula( String titulo, String cedula ) throws Exception
     {
-    	//TODO implementar
-    }
+    	
+    	 Pelicula pelicula = buscarPelicula(titulo);
+         if (pelicula == null) {
+             throw new Exception("La película '" + titulo + "' no existe en el catálogo.");
+         }
+
+         Cliente cliente = buscarCliente(cedula);
+         if (cliente == null) {
+             throw new Exception("El cliente con cédula " + cedula + " no existe.");
+         }
+
+         //verifica si hay copias disponibles
+         if (pelicula.darNumeroCopiasDisponibles() == 0) {
+             throw new Exception("No hay copias disponibles de la película '" + titulo + "'.");
+         }
+
+         // Se verifica el saldo del cliente
+         if (cliente.darSaldo() < tarifaDiaria) {
+             throw new Exception("El saldo del cliente no es suficiente para el alquiler. Saldo actual: " + cliente.darSaldo() + ", Costo: " + tarifaDiaria);
+         }
+
+         //está bien se procede al alquiler
+         Copia copiaAlquilada = pelicula.alquilarCopia(); 
+         if (copiaAlquilada == null) { 
+              throw new Exception("Error interno: No se pudo obtener una copia para alquilar.");
+         }
+
+         cliente.alquilarCopia(copiaAlquilada); 
+         cliente.pagarAlquiler(tarifaDiaria);
+
+         return copiaAlquilada.darCodigo();
+     }
+    
 
     /**
      * Devuelve a la videotienda una copia alquilada por el cliente identificado con la c�dula dada. <br>
@@ -176,8 +243,32 @@ public class VideoTienda
      */
     public void devolverCopia( String titulo, int numeroCopia, String cedula ) throws Exception
     {
-    	//TODO implementar
+    	 Cliente cliente = buscarCliente(cedula);
+         if (cliente == null) {
+             throw new Exception("El cliente con cédula " + cedula + " no existe.");
+         }
 
+         Pelicula pelicula = buscarPelicula(titulo);
+         if (pelicula == null) {
+             throw new Exception("Error interno: La película '" + titulo + "' no se encontró en el catálogo.");
+         }
+
+         Copia copiaADevolver = null;
+         // Se busca la copia en la lista de copias prestadas del cliente
+         for (Copia c : cliente.darCopiasPrestadas()) {
+             if (c.darTituloPelicula().equals(titulo) && c.darCodigo() == numeroCopia) {
+                 copiaADevolver = c;
+                 break;
+             }
+         }
+
+         if (copiaADevolver == null) {
+             throw new Exception("El cliente con cédula " + cedula + " no tiene alquilada la copia número " + numeroCopia + " de la película '" + titulo + "'.");
+         }
+
+         //se procede con la devolución
+         cliente.devolverCopia(copiaADevolver); 
+         pelicula.devolverCopia(copiaADevolver); 
     }
     
     /**
@@ -204,14 +295,31 @@ public class VideoTienda
      * Retorna la lista de clientes de la videotienda
      * @return ArrayList la lista de clientes
      */
+<<<<<<< HEAD
     //TODO Definir la signatura del m�todo de acuerdo a la documentaci�n e implementarlo.
+=======
+ 
+    public ArrayList<Cliente> darClientes( )
+    {
+        return new ArrayList<>(clientes);
+    }
+>>>>>>> 5ec525a1ab8ad652f4a33f7af587c204aa2c90e0
 
     /**
      * Retorna el cat�logo de pel�culas de la videotienda
      * @return lista de pel�culas existentes. lista != null.
      */
     //TODO Definir la signatura del m�todo de acuerdo a la documentaci�n e implementarlo.
+<<<<<<< HEAD
 
+=======
+    public ArrayList<Pelicula> darCatalogo( )
+    {
+        return new ArrayList<>(catalogo); 
+    }
+    
+    
+>>>>>>> 5ec525a1ab8ad652f4a33f7af587c204aa2c90e0
     //-----------------------------------------------------------------
     // Puntos de Extensi�n
     //-----------------------------------------------------------------
