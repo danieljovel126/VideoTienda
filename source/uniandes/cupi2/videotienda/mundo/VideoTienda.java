@@ -36,12 +36,10 @@ public class VideoTienda
      * Clientes
      */
     //TODO declare el atributo
-<<<<<<< HEAD
     private double tarifa;
-
-=======
+    
     private ArrayList<Cliente> clientes;
->>>>>>> 5ec525a1ab8ad652f4a33f7af587c204aa2c90e0
+
     /**
      * Cat�logo de pel�culas
      */
@@ -57,15 +55,15 @@ public class VideoTienda
      */
     public VideoTienda( int unaTarifa )
     {
-<<<<<<< HEAD
+
     	tarifa = 2.5; //TODO implementar inicializando los atributos
-=======
+
     	//TODO implementar inicializando los atributos
     	// Inicializa el ArrayList de clientes y catalogo
     	this.tarifaDiaria = unaTarifa;
         this.clientes = new ArrayList<>(); 
         this.catalogo = new ArrayList<>();
->>>>>>> 5ec525a1ab8ad652f4a33f7af587c204aa2c90e0
+
     }
 
     //-----------------------------------------------------------------
@@ -310,24 +308,20 @@ public class VideoTienda
      * Retorna la lista de clientes de la videotienda
      * @return ArrayList la lista de clientes
      */
-<<<<<<< HEAD
+
     //TODO Definir la signatura del m�todo de acuerdo a la documentaci�n e implementarlo.
-=======
  
     public ArrayList<Cliente> darClientes( )
     {
         return new ArrayList<>(clientes);
     }
->>>>>>> 5ec525a1ab8ad652f4a33f7af587c204aa2c90e0
 
     /**
      * Retorna el cat�logo de pel�culas de la videotienda
      * @return lista de pel�culas existentes. lista != null.
      */
     //TODO Definir la signatura del m�todo de acuerdo a la documentaci�n e implementarlo.
-<<<<<<< HEAD
 
-=======
     public ArrayList<Pelicula> darCatalogo( )
     {
         return new ArrayList<>(catalogo); 
@@ -338,7 +332,6 @@ public class VideoTienda
         return new ArrayList<>(clientes);
     }
   
->>>>>>> 5ec525a1ab8ad652f4a33f7af587c204aa2c90e0
     //-----------------------------------------------------------------
     // Puntos de Extensi�n
     //-----------------------------------------------------------------

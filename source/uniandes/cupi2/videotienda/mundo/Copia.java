@@ -1,4 +1,8 @@
- /**
+package uniandes.cupi2.videotienda.mundo;
+
+
+
+/**
  * La clase Copia representa una copia de una película que se alquila en la videotienda.
  * Cada copia tiene un identificador único basado en el nombre de la película y un consecutivo.
  */

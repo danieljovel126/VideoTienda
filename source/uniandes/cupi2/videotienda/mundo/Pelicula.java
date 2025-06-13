@@ -34,16 +34,12 @@ public class Pelicula
      * Lista de copias disponibles
      */
     private  ArrayList<Copia> disponibles; //tipo copia
-    
-    private ArrayList disponibles;
 
     /**
      * Lista de copias prestadas
      */
     private ArrayList<Copia> prestadas;
     
-    private ArrayList prestadas;
-
     /**
      * N�mero de la siguiente copia a adicionar
      */
@@ -79,7 +75,7 @@ public class Pelicula
      */
     public int agregarCopia( )
     {
-    	Copia nuevaCopia = new copia(this.titulo,this.codigoSiguienteCopia);
+    	Copia nuevaCopia = new Copia(this.titulo,this.codigoSiguienteCopia);
     	disponibles.add(nuevaCopia);
     	int codigoAsignado = codigoSiguienteCopia;
     	codigoSiguienteCopia++;
