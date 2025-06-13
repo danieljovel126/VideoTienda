@@ -127,6 +127,16 @@ public class Pelicula
     {
         return titulo;
     }
+    
+    public Copia darCopia(int codigo) {
+        for (Copia copia : disponibles) {
+            if (copia.darCodigo() == codigo) {
+                return copia;
+            }
+        }
+        return null;
+    }
+    
 
     /**
      * Retorna la cantidad total de copias que existen de la pel�cula en la videotienda

@@ -158,6 +158,11 @@ public class VideoTienda
         }
         return null; 
     }
+    
+    public void modificarTarifa(int nuevaTarifa) {
+        this.tarifaDiaria = nuevaTarifa;
+    }
+
 
 
 
@@ -184,6 +189,16 @@ public class VideoTienda
           cliente.incrementarSaldo(monto);
       
     }
+    
+    public Pelicula buscarPelicula(String titulo) {
+        for (Pelicula pelicula : catalogo) {
+            if (pelicula.darTitulo().equals(titulo)) {
+                return pelicula;
+            }
+        }
+        return null;
+     }
+     
 
     /**
      * Alquila una pel�cula a un cliente. <br>
@@ -317,8 +332,12 @@ public class VideoTienda
     {
         return new ArrayList<>(catalogo); 
     }
-    
-    
+
+
+    public ArrayList<Cliente> darListaClientes() {
+        return new ArrayList<>(clientes);
+    }
+  
 >>>>>>> 5ec525a1ab8ad652f4a33f7af587c204aa2c90e0
     //-----------------------------------------------------------------
     // Puntos de Extensi�n
