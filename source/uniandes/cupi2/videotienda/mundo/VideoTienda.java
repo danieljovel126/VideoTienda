@@ -301,7 +301,22 @@ public class VideoTienda
         return tarifa;
     }
 
+    /**
+     * Agrega una nueva copia a la película con el título dado.
+     * Si la película no existe, la crea primero y le asigna la primera copia.
+     * @param titulo El título de la película a agregar o a la que agregar una copia.
+     */
+    public void agregarCopiaPelicula(String titulo) {
+        Pelicula pelicula = buscarPelicula(titulo);
 
+        if (pelicula == null) {
+            pelicula = new Pelicula(titulo);
+            catalogo.add(pelicula);
+        }
+        pelicula.agregarCopia();
+    	
+    }
+    
 
 
     /**
